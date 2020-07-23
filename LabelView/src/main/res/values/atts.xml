@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LabelView">
+        <attr name="verticalSpacing" format="dimension" />
+        <attr name="titleVerticalSpacing" format="dimension" />
+        <attr name="horizontalSpacing" format="dimension" />
+        <attr name="isAdaptive" format="boolean" />
+        <attr name="isShowTitle" format="boolean" />
+        <attr name="showTitleStr" format="string" />
+        <attr name="showUnlimited" format="string" />
+        <attr name="defLabelHeight" format="dimension" />
+        <attr name="maxColumn" format="integer" />
+        <attr name="maxRowNum" format="integer" />
+        <attr name="tagPaddingTop" format="dimension" />
+        <attr name="tagPaddingLeft" format="dimension" />
+        <attr name="tagPaddingRight" format="dimension" />
+        <attr name="tagPaddingBottom" format="dimension" />
+        <attr name="labelDefBackground" format="reference" />
+        <attr name="labelSelBackground" format="reference" />
+        <attr name="isMoreSelected" format="boolean" />
+        <attr name="isAllLabelShowDrawable" format="boolean" />
+        <attr name="isReverseElection" format="boolean" />
+        <attr name="isShowUnlimited" format="boolean" />
+        <attr name="isSelectUnlimited" format="boolean" />
+        <attr name="labelDrawable" format="reference" />
+        <attr name="titleDrawable" format="reference" />
+        <attr name="labelDrawablePadding" format="dimension" />
+        <attr name="titleDrawablePadding" format="dimension" />
+        <attr name="titleTextSize" format="dimension" />
+        <attr name="titleTextColor" format="color" />
+        <attr name="labelTextSize" format="dimension" />
+        <attr name="labelTextColor" format="color" />
+        <attr name="labelTextColorSelect" format="color" />
+        <attr name="labelDrawableGravity" format="enum">
+            <enum name="left" value="1" />
+            <enum name="top" value="2" />
+            <enum name="right" value="3" />
+            <enum name="bottom" value="4" />
+        </attr>
+        <attr name="titleDrawableGravity" format="enum">
+            <enum name="left" value="1" />
+            <enum name="top" value="2" />
+            <enum name="right" value="3" />
+            <enum name="bottom" value="4" />
+        </attr>
+    </declare-styleable>
+</resources>
