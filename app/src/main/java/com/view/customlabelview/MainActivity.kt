@@ -36,6 +36,28 @@ class MainActivity : AppCompatActivity() {
         }.onCreateLabel(list) {
             return@onCreateLabel (list[it].label)
         }
+
+        findViewById<LabelView>(R.id.labelView3).apply {
+            setSelectedBlock { any, i ->
+                Toast.makeText(this@MainActivity, "$any,$i", Toast.LENGTH_SHORT).show()
+            }
+        }.onCreateLabel(list) {
+            return@onCreateLabel (list[it].label)
+        }
+        findViewById<LabelView>(R.id.labelView4).apply {
+            setSelectedBlock { any, i ->
+                Toast.makeText(this@MainActivity, "$any,$i", Toast.LENGTH_SHORT).show()
+            }
+        }.onCreateLabel(list) {
+            return@onCreateLabel (list[it].label)
+        }
+        findViewById<LabelView>(R.id.labelView5).apply {
+            setSelectedBlock { any, i ->
+                Toast.makeText(this@MainActivity, "$any,$i", Toast.LENGTH_SHORT).show()
+            }
+        }.onCreateLabel(list) {
+            return@onCreateLabel (list[it].label)
+        }
     }
 
     data class LabelModel(var label: String)

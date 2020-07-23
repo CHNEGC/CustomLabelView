@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -26,17 +27,40 @@ class LabelView : ViewGroup {
         defStyleAttr
     ) {
         context.obtainStyledAttributes(attrs, R.styleable.LabelView).apply {
-            verticalSpacing = getDimension(R.styleable.LabelView_verticalSpacing, DisplayUtil.dpToPx(10f).toFloat()).toInt()
+            verticalSpacing = getDimension(
+                R.styleable.LabelView_verticalSpacing,
+                DisplayUtil.dpToPx(10f).toFloat()
+            ).toInt()
             titleVerticalSpacing =
-                getDimension(R.styleable.LabelView_titleVerticalSpacing, DisplayUtil.dpToPx(12f).toFloat()).toInt()
-            horizontalSpacing = getDimension(R.styleable.LabelView_horizontalSpacing, DisplayUtil.dpToPx(10f).toFloat()).toInt()
+                getDimension(
+                    R.styleable.LabelView_titleVerticalSpacing,
+                    DisplayUtil.dpToPx(12f).toFloat()
+                ).toInt()
+            horizontalSpacing = getDimension(
+                R.styleable.LabelView_horizontalSpacing,
+                DisplayUtil.dpToPx(10f).toFloat()
+            ).toInt()
             defLabelHeight = getDimension(R.styleable.LabelView_defLabelHeight, 0f).toInt()
-            tagPaddingTop = getDimension(R.styleable.LabelView_tagPaddingTop, DisplayUtil.dpToPx(10f).toFloat()).toInt()
-            tagPaddingLeft = getDimension(R.styleable.LabelView_tagPaddingLeft, DisplayUtil.dpToPx(10f).toFloat()).toInt()
-            tagPaddingBottom = getDimension(R.styleable.LabelView_tagPaddingBottom, DisplayUtil.dpToPx(10f).toFloat()).toInt()
-            tagPaddingRight = getDimension(R.styleable.LabelView_tagPaddingRight, DisplayUtil.dpToPx(10f).toFloat()).toInt()
-            titleTextSize = getDimension(R.styleable.LabelView_titleTextSize, 18f)
-            labelTextSize = getDimension(R.styleable.LabelView_labelTextSize, 16f)
+            tagPaddingTop = getDimension(
+                R.styleable.LabelView_tagPaddingTop,
+                DisplayUtil.dpToPx(10f).toFloat()
+            ).toInt()
+            tagPaddingLeft = getDimension(
+                R.styleable.LabelView_tagPaddingLeft,
+                DisplayUtil.dpToPx(10f).toFloat()
+            ).toInt()
+            tagPaddingBottom = getDimension(
+                R.styleable.LabelView_tagPaddingBottom,
+                DisplayUtil.dpToPx(10f).toFloat()
+            ).toInt()
+            tagPaddingRight = getDimension(
+                R.styleable.LabelView_tagPaddingRight,
+                DisplayUtil.dpToPx(10f).toFloat()
+            ).toInt()
+            titleTextSize =
+                getDimension(R.styleable.LabelView_titleTextSize, DisplayUtil.spToPx(18))
+            labelTextSize =
+                getDimension(R.styleable.LabelView_labelTextSize, DisplayUtil.spToPx(14))
             labelDrawablePadding =
                 getDimension(R.styleable.LabelView_labelDrawablePadding, 0f).toInt()
             titleDrawablePadding =
@@ -66,7 +90,7 @@ class LabelView : ViewGroup {
                 R.drawable.tag_bg_selector
             )
             labelDrawable =
-                getSourceResourceId(R.styleable.LabelView_labelDrawable, R.drawable.tag_bg_selector)
+                getDrawable(R.styleable.LabelView_labelDrawable)
             maxColumn = getInt(R.styleable.LabelView_maxColumn, 4)
             maxRowNum = getInt(R.styleable.LabelView_maxRowNum, Int.MAX_VALUE)
             isAdaptive = getBoolean(R.styleable.LabelView_isAdaptive, false)
@@ -146,8 +170,8 @@ class LabelView : ViewGroup {
      */
     private var isShowUnlimited = false
     private var showUnlimited = ""
-    private var labelDrawable = 0
-    private var titleDrawable = 0
+    private var labelDrawable: Drawable? = null
+    private var titleDrawable: Drawable? = null
     private var isAllLabelShowDrawable = true
     private var labelDrawablePadding = 0
     private var titleDrawablePadding = 0
@@ -196,7 +220,7 @@ class LabelView : ViewGroup {
         TextView(context).apply {
             text = showUnlimited
             gravity = Gravity.CENTER
-            textSize = labelTextSize
+            paint.textSize = labelTextSize
             setTextColor(labelTextColor)
             setBackgroundResource(labelDefBackground)
             if (isAllLabelShowDrawable) {
@@ -215,7 +239,7 @@ class LabelView : ViewGroup {
             text = showTitleStr
             setTextColor(titleTextColor)
             gravity = Gravity.CENTER_VERTICAL
-            textSize = titleTextSize
+            paint.textSize = titleTextSize
             layoutParams =
                 LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
             setDrawable(this, titleDrawableGravity, titleDrawablePadding, titleDrawable)
@@ -381,7 +405,12 @@ class LabelView : ViewGroup {
                 childView.layoutParams.width = LayoutParams.WRAP_CONTENT
                 childView.layoutParams.height =
                     if (defLabelHeight > 0) defLabelHeight else LayoutParams.WRAP_CONTENT
-
+                childView.setPadding(
+                    tagPaddingLeft,
+                    if (defLabelHeight > 0) 0 else tagPaddingTop,
+                    tagPaddingRight,
+                    if (defLabelHeight > 0) 0 else tagPaddingBottom
+                )
             }
         }
     }
@@ -390,32 +419,32 @@ class LabelView : ViewGroup {
         label: TextView,
         drawableGravity: DrawableState,
         drawablePadding: Int,
-        drawable: Int
+        drawable: Drawable?
     ) {
         label.compoundDrawablePadding = drawablePadding
         when (drawableGravity) {
             DrawableState.Left -> label.setCompoundDrawablesWithIntrinsicBounds(
                 drawable,
-                0,
-                0,
-                0
+                null,
+                null,
+                null
             )
             DrawableState.Right -> label.setCompoundDrawablesWithIntrinsicBounds(
-                0,
-                0,
+                null,
+                null,
                 drawable,
-                0
+                null
             )
             DrawableState.Top -> label.setCompoundDrawablesWithIntrinsicBounds(
-                0,
+                null,
                 drawable,
-                0,
-                0
+                null,
+                null
             )
             DrawableState.Bottom -> label.setCompoundDrawablesWithIntrinsicBounds(
-                0,
-                0,
-                0,
+                null,
+                null,
+                null,
                 drawable
             )
         }
@@ -451,7 +480,7 @@ class LabelView : ViewGroup {
             val label = TextView(context).apply {
                 text = if (value is String) value else block?.invoke(index) ?: ""
                 gravity = Gravity.CENTER
-                textSize = labelTextSize
+                paint.textSize = labelTextSize
                 setTextColor(labelTextColor)
                 setDrawable(this, labelDrawableGravity, labelDrawablePadding, labelDrawable)
             }.apply {

@@ -26,6 +26,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <com.view.labelview.LabelView
+                android:id="@+id/labelView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:defLabelHeight="36dp"
+                app:labelTextSize="12sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.view.labelview.LabelView
+                android:id="@+id/labelView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:defLabelHeight="36dp"
+                app:isAdaptive="true"
+                app:isMoreSelected="true"
+                app:isShowTitle="true"
+                app:labelTextSize="12sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showTitleStr="labelView5" />
+
+            <com.view.labelview.LabelView
+                android:id="@+id/labelView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:defLabelHeight="36dp"
+                app:isShowTitle="true"
+                app:labelDrawable="@mipmap/icon_xiaojiantou"
+                app:labelDrawableGravity="right"
+                app:labelTextSize="12sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showTitleStr="labelView4" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
